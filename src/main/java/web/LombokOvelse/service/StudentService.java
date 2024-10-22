@@ -49,11 +49,24 @@ public class StudentService {
     }
 
     public StudentResponseDTO createStudent(StudentRequestDTO studentRequestDTO) {
-        Student newStudent = new Student(studentRequestDTO.name(), studentRequestDTO.password(), studentRequestDTO.bornDate(), studentRequestDTO.bornTime());
+        /*Student newStudent = new Student(studentRequestDTO.name(), studentRequestDTO.password(), studentRequestDTO.bornDate(), studentRequestDTO.bornTime());
+        Student studentResponse = studentRepository.save(newStudent);
+
+
+         */
+
+
+        Student newStudent = new Student(studentRequestDTO.name(),
+                studentRequestDTO.password(),
+                studentRequestDTO.bornDate(),
+                studentRequestDTO.bornTime());
         Student studentResponse = studentRepository.save(newStudent);
 
         return new StudentResponseDTO(studentResponse.getId(), studentResponse.getName(), studentResponse.getBornDate(), studentResponse.getBornTime());
+
+
     }
+
 
     public StudentResponseDTO updateStudent(Long id, StudentRequestDTO studentRequestDTO) {
         Optional<Student> optionalStudent = studentRepository.findById(id);
