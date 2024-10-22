@@ -4,7 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -13,6 +15,8 @@ import java.time.LocalTime;
 @Setter
 @Getter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Student {
 
     @Id
@@ -34,16 +38,6 @@ public class Student {
         this.bornTime = bornTime;
     }
 
-    public Student(Long id, String name, String password, LocalDate bornDate, LocalTime bornTime) {
-        this.id = id;
-        this.name = name;
-        this.password = password;
-        this.bornDate = bornDate;
-        this.bornTime = bornTime;
-    }
-
-    public Student() {
-    }
 
 }
 
