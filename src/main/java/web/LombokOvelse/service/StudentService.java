@@ -1,6 +1,7 @@
 package web.LombokOvelse.service;
 
 import org.springframework.stereotype.Service;
+import web.LombokOvelse.dto.StudentRequestDTO;
 import web.LombokOvelse.dto.StudentResponseDTO;
 import web.LombokOvelse.model.Student;
 import web.LombokOvelse.repository.StudentRepository;
@@ -8,7 +9,6 @@ import web.LombokOvelse.repository.StudentRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 @Service
 public class StudentService {
 
@@ -18,7 +18,6 @@ public class StudentService {
     public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
-
 
     public List<StudentResponseDTO> getAllStudents() {
         List<Student> students = studentRepository.findAll();
@@ -33,7 +32,7 @@ public class StudentService {
         return studentResponseDTOs;
     }
 
-    public Student getStudentById(Long id) {
+    public StudentResponseDTO getStudentById(Long id) {
         Optional<Student> optionalStudent = studentRepository.findById(id);
 
         // Throw RuntimeException if student is not found
@@ -41,16 +40,17 @@ public class StudentService {
             throw new RuntimeException("Student not found with id " + id);
         }
 
-        Student studentResponse = optionalStudent.get();
+        Student student = optionalStudent.get();
 
-        return studentResponse;
+        return new StudentResponseDTO(student.getId(), student.getName(), student.getBornDate(), student.getBornTime());
 
     }
 
-    public Student createStudent(Student studentRequest) {
-        Student studentResponse = studentRepository.save(studentRequest);
+    public StudentResponseDTO createStudent(StudentRequestDTO studentRequestDTO) {
+        Student newStudent = new Student(studentRequestDTO.name(), studentRequestDTO.password(), studentRequestDTO.bornDate(), studentRequestDTO.bornTime());
+        Student studentResponse = studentRepository.save(newStudent);
 
-        return studentResponse;
+        return new StudentResponseDTO(studentResponse.getId(), studentResponse.getName(), studentResponse.getBornDate(), studentResponse.getBornTime());
     }
 
     public Student updateStudent(Long id, Student studentRequest) {

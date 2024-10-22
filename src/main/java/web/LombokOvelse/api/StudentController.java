@@ -4,6 +4,7 @@ package web.LombokOvelse.api;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import web.LombokOvelse.dto.StudentRequestDTO;
 import web.LombokOvelse.dto.StudentResponseDTO;
 import web.LombokOvelse.model.Student;
 import web.LombokOvelse.service.StudentService;
@@ -28,9 +29,9 @@ public class StudentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Student> getStudentById(@PathVariable Long id) {
+    public ResponseEntity<StudentResponseDTO> getStudentById(@PathVariable Long id) {
         try {
-            Student student = studentService.getStudentById(id);
+            StudentResponseDTO student = studentService.getStudentById(id);
             return new ResponseEntity<>(student, HttpStatus.OK);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -38,8 +39,8 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<Student> createStudent(@RequestBody Student studentRequest) {
-        Student newStudent = studentService.createStudent(studentRequest);
+    public ResponseEntity<StudentResponseDTO> createStudent(@RequestBody StudentRequestDTO studentRequestDTO) {
+        StudentResponseDTO newStudent = studentService.createStudent(studentRequestDTO);
         return new ResponseEntity<>(newStudent, HttpStatus.CREATED);
     }
 
