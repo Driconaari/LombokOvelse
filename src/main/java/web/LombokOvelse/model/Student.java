@@ -4,10 +4,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+@Setter
+@Getter
 @Entity
 public class Student {
 
@@ -41,44 +45,5 @@ public class Student {
     public Student() {
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public LocalDate getBornDate() {
-        return bornDate;
-    }
-
-    public void setBornDate(LocalDate bornDate) {
-        this.bornDate = bornDate;
-    }
-
-    public LocalTime getBornTime() {
-        return bornTime;
-    }
-
-    public void setBornTime(LocalTime bornTime) {
-        this.bornTime = bornTime;
-    }
 }
 
