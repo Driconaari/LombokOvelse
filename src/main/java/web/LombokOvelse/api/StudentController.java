@@ -4,6 +4,7 @@ package web.LombokOvelse.api;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import web.LombokOvelse.dto.StudentResponseDTO;
 import web.LombokOvelse.model.Student;
 import web.LombokOvelse.service.StudentService;
 
@@ -22,7 +23,7 @@ public class StudentController {
     }
 
     @GetMapping
-    public List<Student> getAllStudents() {
+    public List<StudentResponseDTO> getAllStudents() {
         return studentService.getAllStudents();
     }
 

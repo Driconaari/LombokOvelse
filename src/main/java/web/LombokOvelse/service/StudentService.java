@@ -1,6 +1,7 @@
 package web.LombokOvelse.service;
 
 import org.springframework.stereotype.Service;
+import web.LombokOvelse.dto.StudentResponseDTO;
 import web.LombokOvelse.model.Student;
 import web.LombokOvelse.repository.StudentRepository;
 
@@ -18,16 +19,18 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
-    public List<Student> getAllStudents() {
+
+    public List<StudentResponseDTO> getAllStudents() {
         List<Student> students = studentRepository.findAll();
-        List<Student> studentResponses = new ArrayList<>();
+        List<StudentResponseDTO> studentResponseDTOs = new ArrayList<>();
 
         // Using a for-loop to convert each Student to a StudentResponseDTO
         for (Student student : students) {
-            studentResponses.add(student);
+            StudentResponseDTO studentResponseDTO = new StudentResponseDTO(student.getId(), student.getName(), student.getBornDate(), student.getBornTime());
+            studentResponseDTOs.add(studentResponseDTO);
         }
 
-        return studentResponses;
+        return studentResponseDTOs;
     }
 
     public Student getStudentById(Long id) {
